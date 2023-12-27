@@ -171,7 +171,7 @@ for i in range(100):
     guesses = hit + miss + comp
     shot = get_shot(guesses)
     ships, hit, miss, comp, missed = check_shot(shot, ships, hit, miss, comp)
-    show_board(hit, miss, omp)
+    show_board(hit, miss, comp)
 # Repeat until ships empty
     if check_if_empty(ships):
         print("You sunk all of the ships in", i + 1, "shots! YOU WIN!")
