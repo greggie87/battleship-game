@@ -5,9 +5,9 @@ import random
 print("\nSOLO BATTLESHIP GAME!\n")
 # Description and instructions
 print("Guess where to shoot in order to sink the computer ships!\n")
-print("\nThere are 5 ships to sink with sizes of 5,4,3,2 and 1.\n")
-print("X is a miss, O is a hit")
-print(" and @ means that you have sunk that ship completely.\n")
+print("There are 5 ships to sink with sizes of 5,4,3,2 and 1.")
+print("X is a miss, O is a hit.")
+print("@ means that you have sunk that ship completely.")
 print("Aim to shoot by choosing a number on the grid from 0-99.\n")
 
 
