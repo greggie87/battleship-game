@@ -47,7 +47,7 @@ def show_board(hit, miss, comp):
             place = place + 1
         print(x, " ", row)
 
-def check_shot(shot, boat1, hit, miss, comp):
+def check_shot(shot, boat1, boat2, hit, miss, comp):
     """
     Checks shot for a hit, miss, or completed ship and returns
     """
@@ -60,10 +60,22 @@ def check_shot(shot, boat1, hit, miss, comp):
             comp.append(shot)
     else:
         miss.append(shot)
+    
+     if shot in boat2:
+        boat2.remove(shot)
+        if len(boat1) > 0:
+            hit.append(shot)
+        else:
+            comp.append(shot)
+    else:
+        miss.append(shot)
+   
 
-    return boat1, hit, miss, comp
+    return boat1, boat2, hit, miss, comp
 
 boat1 = [22, 23, 24]
+boat2 = [55, 45, 35]
+
 hit = []
 miss = []
 comp = []
@@ -72,5 +84,10 @@ comp = []
 for i in range(10):
     guesses = hit + miss + comp
     shot = get_shot(guesses)
-    boat1,hit,miss,comp = check_shot(shot,boat1,hit,miss,comp)
+    boat1, boat2, hit, miss, comp = check_shot(shot, boat1, boat2, hit, miss, comp)
     show_board(hit, miss, comp)
+
+    if len(boat1) < 1 and len(boat2) < 1:
+        print("You sunk all of the ships! YOU WIN!")
+        break
+print("End of game")
