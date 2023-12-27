@@ -5,6 +5,26 @@ print("It is you against the computer! Guess where to shoot in order to sink the
 #Rules
 
 #Game
+def get_shot(guesses):
+    """
+    User input which only allows integer value. User feedback of error if not a number.
+    Checks if input has already been used in previous turn.
+    """
+    ok = "n"
+    while ok == "n":
+        try:
+            shot = input("Please enter your guess: ")
+            shot = int(shot)
+            if shot < 0 or shot > 99:
+                print("Invalid number, please try again")
+            elif shot in guesses:
+                print("Invalid number, entry has been previously guessed")
+            else:
+                ok = "y"
+                break
+        except:
+            print("Invalid entry - Input must be a number 0-99")
+    return shot
 
 def show_board(hit, miss, comp):
     """
@@ -27,8 +47,30 @@ def show_board(hit, miss, comp):
             place = place + 1
         print(x, " ", row)
 
-hit = [22, 23, 24]
-miss = [11,12,13,14]
-comp = [25]
+def check_shot(shot, boat1, hit, miss, comp):
+    """
+    Checks shot for a hit, miss, or completed ship and returns
+    """
+    
+    if shot in boat1:
+        boat1.remove(shot)
+        if len(boat1) > 0:
+            hit.append(shot)
+        else:
+            comp.append(shot)
+    else:
+        miss.append(shot)
 
-show_board(hit, miss, comp)
+    return boat1, hit, miss, comp
+
+boat1 = [22, 23, 24]
+hit = []
+miss = []
+comp = []
+
+# Loop for guesses
+for i in range(10):
+    guesses = hit + miss + comp
+    shot = get_shot(guesses)
+    boat1,hit,miss,comp = check_shot(shot,boat1,hit,miss,comp)
+    show_board(hit, miss, comp)
